@@ -284,6 +284,90 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Política de privacidad (requerida para modo Live)
+app.get('/privacy', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Política de Privacidad - Chatbot WhatsApp</title>
+      <meta charset="UTF-8">
+      <style>body{font-family:Arial,sans-serif;margin:40px;line-height:1.6}</style>
+    </head>
+    <body>
+      <h1>Política de Privacidad</h1>
+      <p><strong>Última actualización:</strong> ${new Date().toLocaleDateString()}</p>
+      
+      <h2>1. Información que recopilamos</h2>
+      <p>Nuestro chatbot de WhatsApp recopila únicamente:</p>
+      <ul>
+        <li>Número de teléfono de WhatsApp</li>
+        <li>Mensajes enviados al chatbot</li>
+        <li>Hora y fecha de los mensajes</li>
+      </ul>
+      
+      <h2>2. Uso de la información</h2>
+      <p>Utilizamos esta información para:</p>
+      <ul>
+        <li>Proporcionar respuestas automáticas</li>
+        <li>Mejorar nuestro servicio</li>
+        <li>Gestionar citas y consultas</li>
+      </ul>
+      
+      <h2>3. Protección de datos</h2>
+      <p>Nos comprometemos a proteger su información personal y no la compartimos con terceros.</p>
+      
+      <h2>4. Contacto</h2>
+      <p>Para cualquier consulta sobre esta política, contáctenos a través de WhatsApp.</p>
+    </body>
+    </html>
+  `);
+});
+
+// Términos de servicio (requeridos para modo Live)
+app.get('/terms', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Términos de Servicio - Chatbot WhatsApp</title>
+      <meta charset="UTF-8">
+      <style>body{font-family:Arial,sans-serif;margin:40px;line-height:1.6}</style>
+    </head>
+    <body>
+      <h1>Términos de Servicio</h1>
+      <p><strong>Última actualización:</strong> ${new Date().toLocaleDateString()}</p>
+      
+      <h2>1. Aceptación de términos</h2>
+      <p>Al usar nuestro chatbot de WhatsApp, acepta estos términos de servicio.</p>
+      
+      <h2>2. Descripción del servicio</h2>
+      <p>Ofrecemos un servicio de chatbot automatizado para:</p>
+      <ul>
+        <li>Información general</li>
+        <li>Programación de citas</li>
+        <li>Consultas básicas</li>
+        <li>Horarios de atención</li>
+      </ul>
+      
+      <h2>3. Uso apropiado</h2>
+      <p>Se compromete a:</p>
+      <ul>
+        <li>Usar el servicio de manera apropiada</li>
+        <li>No enviar spam o contenido inapropiado</li>
+        <li>Respetar nuestros horarios de atención</li>
+      </ul>
+      
+      <h2>4. Limitaciones</h2>
+      <p>El servicio se proporciona "tal como está" sin garantías específicas.</p>
+      
+      <h2>5. Contacto</h2>
+      <p>Para soporte, contáctenos a través de WhatsApp.</p>
+    </body>
+    </html>
+  `);
+});
+
 // Manejo de errores
 app.use((error, req, res, next) => {
   console.error('💥 Error no manejado:', error);
@@ -302,7 +386,9 @@ app.use('*', (req, res) => {
       'GET /webhook',
       'POST /webhook',
       'POST /test-webhook',
-      'GET /health'
+      'GET /health',
+      'GET /privacy',
+      'GET /terms'
     ]
   });
 });
